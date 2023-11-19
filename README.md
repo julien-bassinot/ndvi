@@ -72,6 +72,11 @@ l'utilisation des ressources à l'écriture 'pythonic' de GDAL. Ainsi les images
 en mémoire lors des calculs, et l'on peut utiliser des méthodes python comme le slicing ou intéragir avec la librairie
 numpy.<br>
 
+En comparant le temps d'exécution des scripts, on peut se rendre compte que l'utilisation de pyotb n'a pas affecté les performances 
+du logiciel OTB et permet même d'avoir des temps de calculs comparables à GDAL, tout en maitrisant les ressources disponibles.
+* Le script du cas1 via numpy (gdal) dure 12 secondes en moyenne sur ma machine contre 11 secondes pour le script de ce repo, dans les mêmes conditions.
+* Le script du cas2 via otb dure 16 secondes en moyenne sur ma machine contre 11 secondes pour le script de ce repo, dans les mêmes conditions.
+
 J'ai également réalisé des tests de performances dans le fichier `performance.py` en faisant varier la RAM disponible 
 et le nombre de CPU, cependant je n'ai pas obtenu de variations significatives en temps de calcul, ce point sera donc à 
 approfondir. De manière générale pour le calcul de gros volumes de données, le traitement 'au fil de l'eau' est à privilégier 
@@ -102,15 +107,15 @@ L'environnement est encapsulé dans un conteneur Docker. Il s'agit de l'image of
 à laquelle vient s'ajouter d'autres librairies comme `pyotb` et `pytest`.
 
 ```shell
-cd ~
 git clone https://github.com/julien-bassinot/ndvi.git
+cd ndvi
 docker build -t orfeo .
 ```
 
 Pour lancer l'image en mode interactif procéder comme suit:
 
 ```shell
-docker run --rm -it -v ~/ndvi:/root/ndvi orfeo
+docker run --rm -it -v $(pwd):/root/ndvi orfeo
 ```
 
 ### Tests unitaires
