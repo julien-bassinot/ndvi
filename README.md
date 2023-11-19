@@ -115,7 +115,7 @@ docker run --rm -it -v ~/ndvi:/root/ndvi orfeo
 
 ### Tests unitaires
 
-Avant de lancer les tests unitaires du fichier test_utils, il faut copier les rasters suivants depuis les fichiers cas1_env-afo
+Avant de lancer les tests unitaires du fichier test_utils, il faut copier les rasters suivants dans ~/ndvi/rasters/.... depuis les fichiers cas1_env-afo
 et cas2_env-otb. Les deux derniers rasters NDVI_CAS1 et NDVI_CAS2 sont les résultats des fonctions cas1 et cas2.
 
 ```shell
@@ -161,7 +161,7 @@ ndvi(input_type='multi',
 from utils import *
 
 band_path = [
-    search_files('./rasters', extension='tif', resolution='SENTINEL2', band='FRE_B4.')
+    search_files('./rasters', extension='tif', resolution='SENTINEL2', band='FRE_B4.'),
     search_files('./rasters', extension='tif', resolution='SENTINEL2', band='FRE_B8.')
 ]
 cloud_path = search_files('./rasters', extension='tif', resolution='SENTINEL2', band='CLM_R1')
